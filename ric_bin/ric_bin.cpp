@@ -1,16 +1,23 @@
-#include <iostream>
-#include <fstream>
+int guess(long long int val);
+void answer(long long int risp);
 
-using namespace std;
+long long int g, l = 1;
 
-int main() {
-    int x;
-    // Read from the text file
-    ifstream inputFile("input.txt");
-    inputFile >> x;
-    ofstream outputFile("output.txt");
-    outputFile << x;
-    outputFile.close();
-
-    return 0;
+void ricerca(long long int n) {
+    while(true)
+        if(n==l)
+            return answer(l);
+        else {
+            g=(n+l)/2;
+            switch (guess(g)){
+                case 0:
+                    return answer(g);
+                case -1:
+                    l = g+1;
+                    break;
+                case 1:
+                    n = g-1;
+                    break;
+            }
+        }
 }
