@@ -13,22 +13,11 @@ long solve() {
 
     unsigned int min = N;
     set<long> viewed;
-    set<long>::iterator it;
 
-    for (unsigned int i = 0; i < N - 1; viewed.insert(X[i++]))
-        if (X[i] < X[min] || min == N) {
-            it = viewed.find(X[i]);
-            if (it != viewed.end())
+    for (unsigned int i = 0; i < N; viewed.insert(X[i++]))
+        if (X[i] < X[min] || min == N)
+            if (viewed.find(X[i]) != viewed.end())
                 min = i;
-        }
-
-    /*
-    for (unsigned int j = i + 1; j < N; j++)
-        if (X[j] < X[min] || min == N)
-            if (X[j] == X[i]) {
-                min = i;
-                break;
-            }*/
 
     return (min == N) ? 0 : X[min];
 }
