@@ -26,9 +26,9 @@ int main() {
   assert(p <= 2);
   assert(n >= 0);
   if(p  == 1)
-    cout << num_mosse(n)) << endl;
+    cout << num_mosse(n) << endl;
   if(p  == 2)
-    cout << mossa(n)) << endl;
+    cout << mossa(n) << endl;
 
   return 0;
 }

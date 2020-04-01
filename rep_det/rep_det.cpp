@@ -14,12 +14,12 @@ long solve() {
     unsigned int min = N;
     set<long> viewed;
 
-    for (unsigned int i = 0; i < N; viewed.insert(X[i++]))
+    for (unsigned int i = 0; i < N; viewed.insert(X[i++]))  // O(n)
         if (X[i] < X[min] || min == N)
-            if (viewed.find(X[i]) != viewed.end())
+            if (viewed.find(X[i]) != viewed.end())          // O(log n)
                 min = i;
 
-    return (min == N) ? 0 : X[min];
+    return (min == N) ? 0 : X[min];                         // O(n * log n)
 }
 
 int main() {
