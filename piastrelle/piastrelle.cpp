@@ -16,7 +16,6 @@ string possible1(int n, string p) {
         return possible1(n - 1, p + "[O]") + possible2(n - 1, p + "[O]");
 
     return "";
-
 }
 
 string possible2(int n, string p) {
