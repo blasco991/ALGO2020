@@ -4,14 +4,13 @@ using namespace std;
 
 string solve(int n, int m = 0, string r = "") {
 
-    if (n == 0 && m == 0)
-        return r + "\n";
-
-    return (n > 0 ? solve(n - 1, m + 1, r + "I") : "") + (m > 0 ? solve(n, m - 1, r + "M") : "");
-
+    return (n == 0 && m == 0) ?
+           r + "\n" : (n > 0 ? solve(n - 1, m + 1, r + "I") : "")
+                      + (m > 0 ? solve(n, m - 1, r + "M") : "");
 }
 
-long cache[10][10] = {1};
+const int N = 10;
+long cache[N + 1][N + 1] = {{1}};
 
 long solveN(int n, int m = 0) {
     return cache[n][m] != 0 ? cache[n][m] :
