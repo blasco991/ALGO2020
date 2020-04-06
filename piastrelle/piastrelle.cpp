@@ -9,13 +9,10 @@ string possible2(int n, string p);
 
 string possible1(int n, string p) {
 
-    if (n == 1)
-        return p + "[O]\n";
+    if (n == 0)
+        return p + "\n";
 
-    if (n > 1)
-        return possible1(n - 1, p + "[O]") + possible2(n - 1, p + "[O]");
-
-    return "";
+    return possible1(n - 1, p + "[O]") + possible2(n - 1, p + "[O]");
 }
 
 string possible2(int n, string p) {
@@ -30,14 +27,13 @@ string possible2(int n, string p) {
 }
 
 int main() {
+#ifdef EVAL
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+#endif
     int n;
-
-    ifstream inputFile("input.txt");
-    ofstream outputFile("output.txt");
-    inputFile >> n;
-    outputFile << possible1(n, "");
-    outputFile << possible2(n, "");
-    outputFile.close();
-    inputFile.close();
+    cin >> n;
+    cout << possible1(n, "");
+    cout << possible2(n, "");
     return 0;
 }

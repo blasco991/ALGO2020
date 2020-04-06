@@ -3,42 +3,69 @@
 
 using namespace std;
 
-string possible1(int n, string p);
+int H(int n);
 
-string possible2(int n, string p);
+int G(int n);
 
-string possible1(int n, string p) {
+void Hp(int n);
 
-    if (n == 1)
-        return p + "[O]\n";
+void Gp(int n);
 
-    if (n > 1)
-        return possible1(n - 1, p + "[O]") + possible2(n - 1, p + "[O]");
+int N;
+int cache[2][10];
 
-    return "";
-
+int F(int n) {
+    return n == 0 ? 1 : (n == 1 ? 2 : F(n - 1) + G(n - 1) + H(n - 2));
 }
 
-string possible2(int n, string p) {
+int G(int n) {
+    return n == 0 ? 1 : F(n) + G(n - 1);
+}
 
-    if (n == 2)
-        return p + "[OOOO]\n";
+int H(int n) {
+    return n == 0 ? 2 : F(n) + G(n);
+}
 
-    if (n > 2)
-        return possible1(n - 2, p + "[OOOO]") + possible2(n - 2, p + "[OOOO]");
+void Fp(int n) {
+    if (n == 0)
+        return;
+    if (n == 1) {
 
-    return "";
+        return 2;
+    }
+
+    return F(n - 1) + G(n - 1) + H(n - 2);
+}
+
+void Gp(int n) {
+    if (n == 0)
+        return 1;
+    return F(n) + G(n - 1);
+}
+
+void Hp(int n) {
+    if (n == 0)
+        return 2;
+    return F(n) + G(n);
+}
+
+void print() {
+    for (int i = 0; i < N; ++i)
+        cout << cache[0][i];
+    cout << endl;
+    for (int i = 0; i < N; ++i)
+        cout << cache[1][i];
 }
 
 int main() {
+#ifdef EVAL
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+#endif
     int n;
-
-    ifstream inputFile("input.txt");
-    ofstream outputFile("output.txt");
-    inputFile >> n;
-    outputFile << possible1(n, "");
-    outputFile << possible2(n, "");
-    outputFile.close();
-    inputFile.close();
+    cin >> n;
+    N = n;
+    cout << F(n) << endl;
+    print();
     return 0;
 }
