@@ -4,3 +4,4 @@
 .replit
 /cmake-build-debug
 CMakeLists.txt
+*.pdf

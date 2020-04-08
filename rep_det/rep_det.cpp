@@ -4,8 +4,8 @@
 
 using namespace std;
 
-vector<long> X;
 int N;
+vector<long> X;
 
 long solve() {
 
