@@ -8,16 +8,21 @@ using namespace std;
 int N;
 vector<int> X;
 
-int possible() {
-    vector<int> pot(X.size(), 0);
+int canEat(int i) {
+    if (i == N)
+        return 0;
 
-    for (int i = N - 1; i >= 0; i--) {
-        for (int j = i + 1; j < N; j++)
-            if (X[j] < X[i])
-                pot[i]++;
-    }
+    return (X[i] > X[i + 1] ? 1 : 0) + canEat(i + 1);
 
-    return N - count(pot.begin(), pot.end(), 0);
+}
+
+int possible(int n) {
+    int ps[N];
+
+    for (int i = 0; i < N; i++)
+        ps[i] = canEat(i);
+
+    return count(ps, ps + N, 0);
 }
 
 int main() {
@@ -31,5 +36,5 @@ int main() {
         scanf("%d", &X[i]);
     }
 
-    cout << possible();
+    cout << possible(N);
 }
