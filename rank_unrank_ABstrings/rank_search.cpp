@@ -1,6 +1,5 @@
 #include <iostream>
 #include <bitset>
-#include <cmath>
 #include <algorithm>
 
 using namespace std;
@@ -8,7 +7,7 @@ const int MAX = 100;
 int length, r;
 string input;
 
-unsigned long long ABstring2rank(string s){
+unsigned long ABstring2rank(string s){
     replace( s.begin(), s.end(), 'A', '0' );
     replace( s.begin(), s.end(), 'B', '1' );
     return  bitset<MAX>(s).to_ulong();
