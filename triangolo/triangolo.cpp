@@ -7,24 +7,8 @@
 using namespace std;
 
 const int MAX = 100;
-int m[MAX][MAX];
+vector<vector<int>> m(MAX, std::vector<int>(MAX));
 int N;
-vector<int> accs(MAX);
-
-void traverse(int acc, int i, int j) {
-    if (i < N - 1) {
-        traverse(acc + m[i][j], i + 1, j);
-        traverse(acc + m[i][j], i + 1, j + 1);
-    } else if (accs[j] < acc + m[i][j])
-        accs[j] = acc + m[i][j];
-}
-
-int max(int n) {
-    accs.resize(n);
-    traverse(0, 0, 0);
-
-    return *max_element(accs.begin(), accs.end());
-}
 
 int main() {
 #ifdef EVAL
@@ -36,18 +20,21 @@ int main() {
         string line;
         getline(file, line);
         N = atoi(line.c_str());
+        m.resize(N);
 
-        for (int i = 0; getline(file, line); i++) {
+        for (int i = 0, j = 0; getline(file, line); m[i].resize(i + 1), i++) {  // O(lines)
             string token;
             stringstream ss(line);
-            for (int j = 0; getline(ss, token, ' '); j++)
+            for (j = 0; getline(ss, token, ' '); j++)                           // O(N)
                 m[i][j] = atoi(token.c_str());
-        }
+        }                                                                               // O(N*lines)
         file.close();
 
+        for (int i = m.size() - 1; i > 0; i--)                                              // O(lines)
+            for (int j = 0; j < m[i - 1].size(); j++)                                       // O(N)
+                m[i - 1][j] += max(m[i][j], m[i][j + 1]);                                   // O(1)
 
-        cout << max(N) << endl;
-
+        cout << m[0][0];                                                                // O(2*N*line)
     }
     return 0;
 }
