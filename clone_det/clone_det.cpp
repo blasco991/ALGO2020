@@ -6,17 +6,17 @@
 using namespace std;
 
 int N;
-vector<long> t1, t2;
+vector<long> A, B;
 
 long solve() {
 
     set<long> v;
     for (int i = N - 1; i > 0; i--) {
 
-        if (!v.insert(t1[i]).second && find(t2.rbegin(), t2.rend(), t1[i]) != t2.rend())
-            return t1[i];
-        if (!v.insert(t2[i]).second && find(t1.rbegin(), t1.rend(), t2[i]) != t1.rend())
-            return t2[i];
+        if (!v.insert(A[i]).second && find(B.rbegin(), B.rend(), A[i]) != B.rend())
+            return A[i];
+        if (!v.insert(B[i]).second && find(A.rbegin(), A.rend(), B[i]) != A.rend())
+            return B[i];
     }
 
     return 0;
@@ -24,14 +24,14 @@ long solve() {
 
 int main() {
     cin >> N;
-    t1.resize(N);
+    A.resize(N);
     for (int i = 0; i < N; i++) {
-        cin >> t1[i];
+        cin >> A[i];
     }
 
-    t2.resize(N);
+    B.resize(N);
     for (int i = 0; i < N; i++) {
-        cin >> t2[i];
+        cin >> B[i];
     }
 
     cout << solve() << endl;
