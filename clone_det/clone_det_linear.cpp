@@ -5,24 +5,24 @@
 using namespace std;
 
 int N;
-vector<long> A, B, i;
+vector<long> t1, t2, i;
 
 long solve() {
 
-    set_intersection(A.begin(), A.end(), B.begin(), B.end(), back_inserter(i));
+    set_intersection(t1.begin(), t1.end(), t2.begin(), t2.end(), back_inserter(i));
 
     return *max_element(i.begin(), i.end());
 }
 
 int main() {
     cin >> N;
-    A.resize(N);
+    t1.resize(N);
     for (int i = 0; i < N; i++)
-        cin >> A[i];
+        cin >> t1[i];
 
-    B.resize(N);
+    t2.resize(N);
     for (int i = 0; i < N; i++)
-        cin >> B[i];
+        cin >> t2[i];
 
 
     cout << solve() << endl;
