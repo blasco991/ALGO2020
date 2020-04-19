@@ -4,28 +4,29 @@
 
 using namespace std;
 
-int compare(vector<char> t1, vector<char> t2) {
+int lt1, lt2;
+const int MAX = 1000;
+int cache[MAX][MAX];
+vector<char> t1, t2;
 
-    for (int i = 0; i < t1.size(); i++)
-        for (int j = 0; j < t2.size(); j++)
-            if(t1[i])
+int solve(int i, int j) {
+    if (cache[i][j] != 0)
+        return cache[i][j];
 
-}
+    if (i == lt1 || j == lt2)
+        return cache[i][j] = 0;
 
-int solve(const vector<char> &t1, const vector<char> &t2) {
-    int m1 = compare(t1, t2);
-    cout << "\nm1: " << m1 << "\n\nsecond search" << endl;
-    int m2 = compare(t2, t1);
+    if (t1[i] == t2[j])
+        return cache[i][j] = 1 + solve(i + 1, j + 1);
 
-    return max(m1, m2);
+    return cache[i][j] = max(solve(i + 1, j), solve(i, j + 1));
+
 }
 
 int main() {
-    int lt1, lt2;
-    vector<char> t1, t2;
-
     cin >> lt1;
     cin >> lt2;
+
     t1.resize(lt1);
     for (int i = 0; i < lt1; i++)
         cin >> t1[i];
@@ -51,5 +52,5 @@ int main() {
     cout << endl;
 #endif
 
-    cout << solve(t1, t2) << endl;
+    cout << solve(0, 0) << endl;
 }
