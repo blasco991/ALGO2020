@@ -5,19 +5,11 @@
 using namespace std;
 
 int compare(vector<char> t1, vector<char> t2) {
-    int i, j, counter, last_find;
-    for (i = counter = last_find = 0; i < t1.size(); i++) {
-        for (j = last_find; j < t2.size(); j++) {
-            printf("\n%d\n%d\t%c == %c: %d\n", i, j, t1[i], t2[j], t2[j] == t1[i]);
-            if (t2[j] == t1[i]) {
-                j++;
-                counter++;
-                last_find = j;
-                break;
-            }
-        }
-    }
-    return counter;
+
+    for (int i = 0; i < t1.size(); i++)
+        for (int j = 0; j < t2.size(); j++)
+            if(t1[i])
+
 }
 
 int solve(const vector<char> &t1, const vector<char> &t2) {
