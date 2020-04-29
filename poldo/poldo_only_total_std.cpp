@@ -17,12 +17,10 @@ int main() {
 
     for (int i = 0, x; i < N; i++) {
         cin >> x;
-        if (all_of(X.begin(), X.end(), [x](int i) { return i > x; }))
-            X.push_back(x);
-        else {
+        if (!all_of(X.begin(), X.end(), [x](int i) { return i > x; })) {
             auto it = upper_bound(X.begin(), X.end(), x, greater_equal<int>());
             *(it) = max(*(it), x);
-        }
+        } else X.push_back(x);
     }
 #ifndef EVAL
     copy(X.begin(), X.end(), ostream_iterator<int>(cout, " "));
