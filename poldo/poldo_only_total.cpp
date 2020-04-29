@@ -16,7 +16,7 @@ int main() {
     scanf("%d", &N);
     X.resize(1);
 
-    for (int i = 0, j, x; i < N; i++) { ;
+    for (int i = 0, j, x; i < N; i++) {
         bool to_insert = true;
         for (j = 0, cin >> x; j < X.size() && to_insert; j++)
             if (x >= X[j]) {

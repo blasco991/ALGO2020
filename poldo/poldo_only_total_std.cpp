@@ -14,17 +14,16 @@ int main() {
     freopen("output.txt", "w", stdout);
 #endif
     scanf("%d", &N);
-    X.resize(1);
-    cin >> X[0];
-    copy(X.begin(), X.end(), ostream_iterator<int>(cout, " "));
-    cout << endl;
+    X.resize(1, 0);
 
-    for (int i = 1, x; i < N; i++) {
+    for (int i = 0, x; i < N; i++) {
         cin >> x;
-        auto it = upper_bound(X.rbegin(), X.rend(), x);
-        if (it == X.rend())
-            X.resize(X.size() + 1, x);
-        else *(it) = *(it) < x ? x : *(it);
+        if (all_of(X.cbegin(), X.cend(), [x](int i) { return i > x; }))
+            X.push_back(x);
+        else {
+            auto it = upper_bound(X.begin(), X.end(), x, less_equal<int>());
+            *(it) = max(*(it), x);
+        }
     }
 #ifndef EVAL
     copy(X.begin(), X.end(), ostream_iterator<int>(cout, " "));
