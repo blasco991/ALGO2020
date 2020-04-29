@@ -6,7 +6,7 @@
 using namespace std;
 
 int N;
-vector<int> X{};
+vector<int> X;
 
 int main() {
 #ifdef EVAL
