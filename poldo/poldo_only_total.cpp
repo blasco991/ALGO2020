@@ -20,7 +20,7 @@ int main() {
         cin >> x;
         bool to_insert = true;
         for (int j = 0; j < X.size() && to_insert; j++)
-            if (X[j] < x) {
+            if (x >= X[j]) {
                 X[j] = x;
                 to_insert = false;
             }
