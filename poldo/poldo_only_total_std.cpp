@@ -6,7 +6,7 @@
 using namespace std;
 
 int N;
-vector<int> X;
+vector<int> X(0);
 
 int main() {
 #ifdef EVAL
@@ -14,14 +14,13 @@ int main() {
     freopen("output.txt", "w", stdout);
 #endif
     scanf("%d", &N);
-    X.resize(1, 0);
 
     for (int i = 0, x; i < N; i++) {
         cin >> x;
-        if (all_of(X.cbegin(), X.cend(), [x](int i) { return i > x; }))
+        if (all_of(X.begin(), X.end(), [x](int i) { return i > x; }))
             X.push_back(x);
         else {
-            auto it = upper_bound(X.begin(), X.end(), x, less_equal<int>());
+            auto it = upper_bound(X.begin(), X.end(), x, greater_equal<int>());
             *(it) = max(*(it), x);
         }
     }
