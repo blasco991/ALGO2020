@@ -6,6 +6,7 @@ using namespace std;
 
 int lt1, lt2;
 const int MAX = 1000;
+
 vector<vector<int>> cache(MAX, vector<int>(MAX));
 vector<char> t1, t2;
 
