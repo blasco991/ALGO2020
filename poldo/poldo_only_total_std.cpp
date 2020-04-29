@@ -22,6 +22,7 @@ int main() {
             *(it) = max(*(it), x);
         } else X.push_back(x);
     }
+
 #ifndef EVAL
     copy(X.begin(), X.end(), ostream_iterator<int>(cout, " "));
     cout << endl;
