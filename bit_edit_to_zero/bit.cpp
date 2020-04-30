@@ -37,6 +37,10 @@ int mossa(int n) {
 }
 
 int main() {
+#ifdef EVAL
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+#endif
     int p, n;
     cin >> p >> n;
     assert(p >= 1);
