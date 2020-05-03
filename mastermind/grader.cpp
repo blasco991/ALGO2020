@@ -1,6 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <assert.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cassert>
 
 static int maxAttempts;
 static int guesses;
@@ -14,8 +14,9 @@ extern void solve();
 
 #define CRAND_MAX 0x7fffffff
 static int rseed;
+
 int rand_cp() {
-	return rseed = (rseed * 1103515245 + 12345) & CRAND_MAX;
+    return rseed = (rseed * 1103515245 + 12345) & CRAND_MAX;
 }
 
 void checkCode(int attempt[], int result[]) {
@@ -24,73 +25,72 @@ void checkCode(int attempt[], int result[]) {
     int fr_att[6] = {0};
     int fr_hist[6] = {0};
 
-    for(int i = 0; i < 4; i++) {
-        if(attempt[i] == secretCode[i]) {
+    for (int i = 0; i < 4; i++) {
+        if (attempt[i] == secretCode[i]) {
             black++;
-        }
-        else {
-          assert(attempt[i] >= 0 && attempt[i] <= 5);
-          assert(secretCode[i] >= 0 && secretCode[i] <= 5);
-          fr_att[attempt[i]]++;
-          fr_hist[secretCode[i]]++;
+        } else {
+            assert(attempt[i] >= 0 && attempt[i] <= 5);
+            assert(secretCode[i] >= 0 && secretCode[i] <= 5);
+            fr_att[attempt[i]]++;
+            fr_hist[secretCode[i]]++;
         }
     }
 
-    for(int i = 0; i < 6; i++) {
-      white += min(fr_att[i], fr_hist[i]);
+    for (int i = 0; i < 6; i++) {
+        white += min(fr_att[i], fr_hist[i]);
     }
     result[0] = black;
     result[1] = white;
 
-	if (result[0] != 4) guesses++;
+    if (result[0] != 4) guesses++;
 }
 
-void pensoCheCodiceSia(int risposta[]){
-	fprintf(file, "%d %d\n", maxAttempts, guesses);
+void pensoCheCodiceSia(int risposta[]) {
+    fprintf(file, "%d %d\n", maxAttempts, guesses);
 
-	for (int j = 0; j < 4; j++) {
-			fprintf(file, "%d ", risposta[j]);
-	}
-	fprintf(file, "\n");
-	fclose(file);
+    for (int j = 0; j < 4; j++) {
+        fprintf(file, "%d ", risposta[j]);
+    }
+    fprintf(file, "\n");
+    fclose(file);
 
-	exit(0);
+    exit(0);
 }
 
-int main(){
+int main() {
 
-	#ifdef EVAL
+#ifdef EVAL
     file = fopen("input.txt", "r");
-	#else
-  	file = stdin;
-	#endif
+#else
+    file = stdin;
+#endif
 
     int subtask, seed;
 
-	fscanf(file, "%d", &subtask);
-	fscanf(file, "%d", &seed);
+    fscanf(file, "%d", &subtask);
+    fscanf(file, "%d", &seed);
 
-	fclose(file);
+    fclose(file);
 
-	#ifdef EVAL
+#ifdef EVAL
     file = fopen("output.txt", "w");
-	#else
+#else
     file = stdout;
-	#endif
+#endif
 
-  rseed = seed;
+    rseed = seed;
 
- 	if(subtask == 0) maxAttempts = 1000000;
-	if(subtask == 1) maxAttempts = 10;
-	if(subtask == 2) maxAttempts = 6; // soluzione ottima (6 errate)
+    if (subtask == 0) maxAttempts = 1000000;
+    if (subtask == 1) maxAttempts = 10;
+    if (subtask == 2) maxAttempts = 6; // soluzione ottima (6 errate)
 
-	for(int i = 0; i < 4; i++){
-		secretCode[i] = rand_cp() % 6;
-	}
+    for (int i = 0; i < 4; i++) {
+        secretCode[i] = rand_cp() % 6;
+    }
 
     guesses = 0;
 
-	solve();
+    solve();
 
     return 0;
 }
