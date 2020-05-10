@@ -28,8 +28,7 @@ int main() {
     freopen("output.txt", "w", stdout);
 #endif
     char x;
-    cin >> N;
-    cin >> M;
+    cin >> N >> M;
     m.resize(N);
     cache.resize(N);
 
