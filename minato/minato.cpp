@@ -10,9 +10,11 @@ vector<vector<int>> cache;
 
 int solve(int i, int j, int counter = 0) {
 
-    if (cache[i][j] != -1) return cache[i][j];
+    if (cache[i][j] != -1)
+        return cache[i][j];
 
-    if (i == N - 1 && j == M - 1) return cache[i][j] = 1;
+    if (i == N - 1 && j == M - 1)
+        return cache[i][j] = 1;
 
     if ((i + 1) < N && m[i + 1][j] == '*')
         counter += solve(i + 1, j);

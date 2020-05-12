@@ -10,7 +10,7 @@ string m1(string s) {
 }
 
 string m2(string s) {
-    for (unsigned i = s.size() - 1; i >= 0; i--)
+    for (unsigned int i = s.size() - 1; i >= 0; i--)
         if (s[i] == '1') {
             s[i - 1] = s[i - 1] == '0' ? '1' : '0';
             return s;
@@ -19,12 +19,13 @@ string m2(string s) {
 }
 
 int num_mosse(int n) {
-    string target;
 
+    string target;
     for (int m = n; m > 0; m /= 2)
         target += m % 2 == 0 ? '0' : '1';
     reverse(target.begin(), target.end());
 
+    n = 0;
     for (string s(target.size(), '0'); s != target; n++)
         s = n % 2 == 0 ? m1(s) : m2(s);
 
@@ -37,10 +38,6 @@ int mossa(int n) {
 }
 
 int main() {
-#ifdef EVAL
-    freopen("input.txt", "r", stdin);
-    freopen("output.txt", "w", stdout);
-#endif
     int p, n;
     cin >> p >> n;
     assert(p >= 1);
