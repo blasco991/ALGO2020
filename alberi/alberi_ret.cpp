@@ -9,10 +9,10 @@
 using namespace std;
 
 string visita(vector<int> &PRE, vector<int> &POST) {
-    //assert(PRE.size() == POST.size());
+    assert(PRE.size() == POST.size());
 
-    if (PRE.empty())
-        return "";
+    if (PRE.size() == 1)
+        return to_string(PRE[0]);
     else {
         auto preEnd = find(PRE.begin() + 1, PRE.end(), POST[POST.size() - 2]);
         vector<int> vPRE(PRE.begin() + 1, preEnd);
