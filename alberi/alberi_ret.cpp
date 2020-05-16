@@ -1,14 +1,19 @@
 #include <algorithm>
-#include <vector>
+#include <iostream>
+#include <iterator>
 #include <cassert>
+#include <sstream>
+#include <vector>
+#include <string>
 
 using namespace std;
 
-void visita(int N, vector<int> &PRE, vector<int> &POST, int *SIMM) {
-    assert(PRE.size() == POST.size());
-    if (PRE.size() == 1 && POST.size() == 1) {
-        *find(SIMM, SIMM + N, 0) = PRE[0];
-    } else {
+string visita(vector<int> &PRE, vector<int> &POST) {
+    //assert(PRE.size() == POST.size());
+
+    if (PRE.empty())
+        return "";
+    else {
         auto preEnd = find(PRE.begin() + 1, PRE.end(), POST[POST.size() - 2]);
         vector<int> vPRE(PRE.begin() + 1, preEnd);
 
@@ -16,15 +21,13 @@ void visita(int N, vector<int> &PRE, vector<int> &POST, int *SIMM) {
         vector<int> vPOST(POST.begin(), postEnd + 1);
 
         //VISITA LEFT
-        visita(N, vPRE, vPOST, SIMM);
-
-        *find(SIMM, SIMM + N, 0) = PRE[0];
+        string s1 = visita(vPRE, vPOST);
 
         vector<int> vPRER(preEnd, PRE.end());
         vector<int> vPOSTR(postEnd + 1, POST.end() - 1);
 
         //VISITA RIGHT
-        visita(N, vPRER, vPOSTR, SIMM);
+        return s1 + " " + to_string(PRE[0]) + " " + visita(vPRER, vPOSTR);
     }
 
 }
@@ -32,6 +35,9 @@ void visita(int N, vector<int> &PRE, vector<int> &POST, int *SIMM) {
 void visita(int N, int *PRE, int *POST, int *SIMM) {
     vector<int> vPRE(PRE, PRE + N);
     vector<int> vPOST(POST, POST + N);
-    vector<int> vSIMM(SIMM, SIMM + N);
-    visita(N, vPRE, vPOST, SIMM);
+    stringstream ssin(visita(vPRE, vPOST));
+    for (int i = 0; ssin.good(); i++) {
+        ssin >> SIMM[i];
+    }
 }
+
