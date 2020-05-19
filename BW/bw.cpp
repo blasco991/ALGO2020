@@ -9,7 +9,7 @@ int N = 100000;
 vector<int> inc;
 
 int count_consec(int i, int j) {
-    return *max_element(inc.begin() + i, inc.begin() + j);
+    return *max_element(inc.begin() + i, inc.begin() + j +1);
 }
 
 void update_inc(int i = 0) {
@@ -26,6 +26,10 @@ void flipBits(int i, int j) {
 }
 
 int main() {
+#ifdef EVAL
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+#endif
     cin >> N;
     inc.resize(N);
     for (int i = 0; i < N; i++)
