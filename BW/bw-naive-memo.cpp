@@ -12,9 +12,7 @@ vector<int> inc;
 map<string, int> cache;
 
 int count_consec(int i, int j, int max_c = 0) {
-    ostringstream oss_out;
-    copy(inc.begin() + i, inc.begin() + j, ostream_iterator<int>(oss_out));
-    string s = oss_out.str();
+    string s(inc.begin() + i, inc.begin() + j);
 
     if (cache.find(s) != cache.end())
         return cache[s];

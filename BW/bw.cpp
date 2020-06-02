@@ -16,7 +16,7 @@ void update_inc(int i = 0) {
 }
 
 int count_consec(int i, int j) {
-    return *max_element(inc.begin() + i, inc.begin() + j);
+    return *max_element(inc.begin() + i, inc.begin() + j );
 }
 
 void flipBits(int i, int j) {

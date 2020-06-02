@@ -11,9 +11,11 @@ vector<int> inc;
 int count_consec(int i, int j) {
     int max_c = 0;
     for (int counter = 0; i < j; i++) {
-        if (inc[i] == 1) {
+        if (inc[i] == 0 && max_c >= (j - i))
+            return max_c;
+        else if (inc[i] == 1)
             max_c = max(max_c, ++counter);
-        } else counter = 0;
+        else counter = 0;
     }
     return max_c;
 }

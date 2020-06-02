@@ -15,21 +15,15 @@ int main() {
     cin >> s;
 
     for (unsigned long long i = d; i < ULLONG_MAX; i += d) {
-        cout << i << endl;
-        vector<int> digits;
+        //cout << i << endl;
 
-        string str = to_string(i);
+        unsigned long long sum = 0;
+        for (unsigned long long k = i; k > 0; k /= 10)
+            sum += k % 10;
 
-        for (auto x : str)
-            digits.push_back(x - '0');
+        //cout << sum << endl << endl;
 
-        int c;
-        if (cache.find(str.substr(str.size() - 1)) != cache.end())
-            c = cache.at(str.substr(str.size() - 1)) + (str[0] - '0');
-        else
-            c = cache[str] = accumulate(digits.begin(), digits.end(), 0L);
-
-        if (c == s) {
+        if (sum == s) {
             cout << i << endl;
             return 0;
         }
