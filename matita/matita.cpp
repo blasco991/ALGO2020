@@ -16,7 +16,7 @@ void search(int n) {
                     break;
                 }
 
-            searc(x);
+            search(x);
             printf("%d %d\n", x, n);
         }
 }
