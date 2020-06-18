@@ -2,7 +2,6 @@
 #include <vector>
 
 using namespace std;
-
 vector<int> adj[1000000];
 
 void search(int n) {
@@ -22,7 +21,7 @@ void search(int n) {
 }
 
 int main() {
-#ifdef    EVAL
+#ifdef EVAL
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
 #endif
